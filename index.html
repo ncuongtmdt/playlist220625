@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Playlist GDrive</title>
+</head>
+<body>
+  <h2>🎵 Playlist TMDT</h2>
+  <audio id="player" controls autoplay></audio>
+  <ul id="playlist">
+    <li data-src="https://drive.google.com/uc?export=download&id=1uDRW-4NQtQNy2aq3WmZuoH3H3tU6e0mx">Bài 1</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1koV_ePEiPdC-4eh851U7SLuhf2WDVsgc">Bài 2</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1BJbLTChUt0zGQeUXpLrqhj8EcbTc9vrK">Bài 3</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1ni29RazvEHYPQKUxvdp9LE_ZrP8Bh7At">Bài 4</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1iuzwWoOAXV0Pc07FX-CKcLZMMnJsIhyM">Bài 5</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1VO_-zZ_fgEoIOK9Um7QbipIrfy7QHtlX">Bài 6</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1YO_iinVe828ghrlM3lBDQ6oILeIGqnGK">Bài 7</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1_6GIxecoVkUGt8YKIHpsBvtVxHMy9FRB">Bài 8</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1nvH8-eKOKUd0-fGPFGccNWciG4CufJFI">Bài 9</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1P8HVF11QbenoT99FFlOwBnTcaVEJZjoB">Bài 10</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1-QNrSExFqb8KOjCNiJPUEhko5PnZPRh4">Bài 11</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=1vwNmZTCJgfkvdMMDUbasVJJkO1bm0Eip">Bài 12</li>
+    <li data-src="https://drive.google.com/uc?export=download&id=10Pp9_UXdgVbiGQjThAXX0nyMV5YUlmcC">Bài 13</li>
+  </ul>
+
+  <script>
+    const player = document.getElementById("player");
+    const tracks = document.querySelectorAll("#playlist li");
+    let current = 0;
+
+    function playTrack(index) {
+      const src = tracks[index].getAttribute("data-src");
+      player.src = src;
+      player.play();
+      current = index;
+    }
+
+    player.addEventListener("ended", () => {
+      current = (current + 1) % tracks.length;
+      playTrack(current);
+    });
+
+    tracks.forEach((track, index) => {
+      track.addEventListener("click", () => {
+        playTrack(index);
+      });
+    });
+
+    playTrack(0);
+  </script>
+</body>
+</html>
